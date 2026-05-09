@@ -1,10 +1,16 @@
+import { Routes, Route } from 'react-router-dom';
+import Signup from './pages/signup/Signup';
+
 function App() {
 
   return (
-    <div className="">
-
-    </div>
-  )
+    <Routes>
+      <Route path="/" element={<>Home</>} />
+      <Route path="/about" element={<>About</>} />
+      <Route path="/create-account" element={<Signup/>} />
+      <Route path="*" element={<>Not Found</>} /> 
+    </Routes>
+  );
 }
 
 export default App
