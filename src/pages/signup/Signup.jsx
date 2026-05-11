@@ -45,6 +45,7 @@ const Signup = () => {
                                 placeholder="Eg: John Doe"
                                 value={newUser.fullname}
                                 onChange={handleInputChange}
+                                isRequired={true}
                             />
 
                             <Input
@@ -54,6 +55,7 @@ const Signup = () => {
                                 placeholder="Eg: Software Engineer"
                                 value={newUser.designation}
                                 onChange={handleInputChange}
+
                             />
 
                         </div>
@@ -66,6 +68,7 @@ const Signup = () => {
                                 placeholder="Eg: john.doe@example.com"
                                 value={newUser.email}
                                 onChange={handleInputChange}
+                                isRequired={true}
                             />
 
                             <Input
@@ -87,6 +90,7 @@ const Signup = () => {
                                 placeholder="Eg: Ekd79,0ok****"
                                 value={newUser.password}
                                 onChange={handleInputChange}
+                                isRequired={true}
                             />
 
                             <Input
@@ -96,6 +100,7 @@ const Signup = () => {
                                 placeholder="Eg: Ekd79,0ok****"
                                 value={newUser.repassword}
                                 onChange={handleInputChange}
+                                isRequired={true}
                             />
 
                         </div>
