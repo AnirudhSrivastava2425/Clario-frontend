@@ -11,6 +11,8 @@ body,
 
 :root{
     --primary-color: #108652;
+    --header-black: #0c0c0c;
+    --univ-bg:#F2F2F2;
     --app-font: "Google Sans Flex", sans-serif;;
 }
 
@@ -23,7 +25,7 @@ h1,h2,h3{
     margin: 0%;
 }
 
-button{
+button, input[type="submit"]{
     border-radius: 5rem;
     width: fit-content;
     height: fit-content;
@@ -38,6 +40,6 @@ button{
     cursor: pointer;
     transition: 0.3s;
 }
-button:hover{
+button:hover, input[type="submit"]:hover{
     background-color: #0D6B43;
 }

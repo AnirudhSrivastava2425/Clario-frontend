@@ -5,16 +5,41 @@
     justify-content: center;
     height: 100%;
 }
-.form-holder{
+.signup-container{
     display: flex;
     flex-direction: column;
     background-color: white;
     padding: 48px;
     border-radius: 0.5rem;
     min-width: 800px;
+    gap: 48px;
 }
-.form-holder h1{
+
+.signup-headers{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.signup-headers h1{
     font-size : 48px;
     font-weight: 600;
     color: var(--primary-color);
 }
+.signup-headers h2{
+    font-size: 36px;
+    font-weight: 500;
+    color: var(--header-black);
+}
+
+
+.form-holder form{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.input-row-2{
+    display: flex;
+    gap: 48px;
+}
+
