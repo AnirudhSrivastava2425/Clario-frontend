@@ -123,6 +123,9 @@ const Signup = () => {
 
                         </div>
                         <button disabled={formIncomplete}>Sign Up</button>
+                        <p className="redirect-text">
+                            Already have an account? <a href="/login">Log In</a>
+                        </p>
                     </form>
                 </div>
 

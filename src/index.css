@@ -48,3 +48,6 @@ button:disabled, input[type="submit"]:disabled{
     background-color: #45b484;
     cursor: not-allowed;
 }
+p{
+    margin: 0%;
+}

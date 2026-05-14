@@ -1,4 +1,4 @@
-.main-wrapper{
+.main-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,41 +7,49 @@
     gap: 24px;
     padding: 40px 40px;
 }
-.signup-container{
+
+.login-container {
     display: flex;
     flex-direction: column;
     background-color: white;
     padding: 48px;
     border-radius: 0.5rem;
-    min-width: 800px;
+    min-width: 480px;
     gap: 48px;
 }
 
-.signup-headers{
+.login-headers {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
-.signup-headers h1{
-    font-size : 48px;
+
+.login-headers h1 {
+    font-size: 48px;
     font-weight: 600;
     color: var(--primary-color);
 }
-.signup-headers h2{
+
+.login-headers h2 {
     font-size: 36px;
     font-weight: 500;
     color: var(--header-black);
 }
 
-
-.form-holder form{
+.form-holder form {
     display: flex;
     flex-direction: column;
     gap: 32px;
 }
 
-.input-row-2{
-    display: flex;
-    gap: 48px;
+.redirect-text {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--header-black);
 }
 
+.redirect-text a {
+    color: var(--primary-color);
+    text-decoration: underline;
+    cursor: pointer;
+}
