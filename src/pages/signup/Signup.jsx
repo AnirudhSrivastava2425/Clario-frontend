@@ -1,8 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Signup.css'
 import Input from '../../components/input/Input'
+import useUserStore from '../../store/user.store'
+
+
 const Signup = () => {
 
+    const {email, isLogged, createUser} = useUserStore();
+    const [formIncomplete, setFormIncomplete] = useState(true);
     const [newUser, setNewUser] = useState({
         fullname: "",
         email: "",
@@ -17,12 +22,25 @@ const Signup = () => {
             ...prev,
             [target]: value,
         }));
+
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(newUser);
+        createUser(newUser);
     }
+
+    useEffect(()=>{
+        
+        if (newUser.fullname === '' || newUser.email === '' || newUser.password === '' || newUser.password !== newUser.repassword) {
+            setFormIncomplete(true);
+        }
+        else{
+            setFormIncomplete(false);
+        }
+
+    },[newUser.fullname, newUser.email, newUser.password,newUser.repassword])
+  
     return (
         <div className='main-wrapper'>
             <div className="signup-container">
@@ -104,9 +122,10 @@ const Signup = () => {
                             />
 
                         </div>
-                        <button>Sign Up</button>
+                        <button disabled={formIncomplete}>Sign Up</button>
                     </form>
                 </div>
+
             </div>
         </div>
     )

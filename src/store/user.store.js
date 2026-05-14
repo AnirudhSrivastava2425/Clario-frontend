@@ -1,15 +1,47 @@
 import { create } from "zustand";
-
-const useUserStore = create((set,get) => ({
+import { supabase } from "../utils/supabase";
+import { Await } from "react-router-dom";
+const useUserStore = create((set, get) => ({
 
     name: '',
     email: '',
     designation: '',
-    phone:'',
+    phone: '',
     isLogged: false,
+    error: null,
 
     // Logic for creating user and setting the details in the store
-    createUser: (obj) => {
+    createUser: async (obj) => {
+
+        const { data: authData, error: authError } = await supabase.auth.signUp({
+            email: obj.email,
+            password: obj.password,
+            options: {
+                data: {
+                    display_name: obj.fullname,
+                    designation: obj.designation,  // any extra field works here too
+                }
+            }
+        });
+
+        if (authError) {
+            set({ error: authError.message });
+            return;
+        }
+
+        const { error: profileError } = await supabase.from('Users').insert([{
+            id: authData.user.id,
+            fullname: obj.fullname,
+            phone: obj.phone,
+            email: obj.email,
+            designation: obj.designation,
+        }]);
+
+        if (profileError) {
+            set({ error: profileError.message });
+            return;
+        }
+
         set({
             name: obj.name,
             email: obj.email,
@@ -21,12 +53,12 @@ const useUserStore = create((set,get) => ({
 
 
     // Logic for getting user details and setting the details in the store
-    getUser: (obj)=>{
+    getUser: (obj) => {
         set({
             name: obj.name,
             email: obj.email,
-            designation: obj.designation?obj.designation:'',
-            phone: obj.phone?obj.phone:'',
+            designation: obj.designation ? obj.designation : '',
+            phone: obj.phone ? obj.phone : '',
             isLogged: true,
         })
     }

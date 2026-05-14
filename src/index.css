@@ -43,3 +43,8 @@ button, input[type="submit"]{
 button:hover, input[type="submit"]:hover{
     background-color: #0D6B43;
 }
+
+button:disabled, input[type="submit"]:disabled{
+    background-color: #45b484;
+    cursor: not-allowed;
+}
