@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 
 const ResetEmail = () => {
 
-    const { forgotPassword } = useUserStore();
+    const { forgotPassword, error } = useUserStore();
     const [formIncomplete, setFormIncomplete] = useState(true);
     const [email, setEmail] = useState('')
 
@@ -15,9 +15,9 @@ const ResetEmail = () => {
         setEmail(value);
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // forgotPassword(email);
+        const result = await forgotPassword(email);
         console.log(email);
     }
 
@@ -28,6 +28,12 @@ const ResetEmail = () => {
             setFormIncomplete(false);
         }
     }, [email])
+
+    useEffect(() => {
+        if (error) {
+            alert(error);
+        }
+    }, [error])
 
     return (
         <div className='main-wrapper'>

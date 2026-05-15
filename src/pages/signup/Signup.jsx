@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 
 const Signup = () => {
 
-    const {email, isLogged, createUser} = useUserStore();
+    const {email, isLogged, createUser,error} = useUserStore();
     const [formIncomplete, setFormIncomplete] = useState(true);
     const [newUser, setNewUser] = useState({
         fullname: "",
@@ -30,6 +30,15 @@ const Signup = () => {
         e.preventDefault();
         createUser(newUser);
     }
+
+    useEffect(() => {
+      if(error){
+        alert(error);
+      }
+    
+
+    }, [error])
+    
 
     useEffect(()=>{
         

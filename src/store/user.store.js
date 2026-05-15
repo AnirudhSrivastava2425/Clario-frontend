@@ -13,6 +13,13 @@ const useUserStore = create((set, get) => ({
     // Logic for creating user and setting the details in the store
     createUser: async (obj) => {
 
+        const { data: presentUserData, error: presentUserError } = await supabase.from('Users').select('*').eq('email', obj.email).single();
+
+        if (presentUserError || presentUserData) {
+            set({ error: "An account with this email already exists. Please login to your account." });
+            return;
+        }
+
         // Input values in auth
         const { data: authData, error: authError } = await supabase.auth.signUp({
             email: obj.email,
@@ -50,7 +57,8 @@ const useUserStore = create((set, get) => ({
             email: obj.email,
             designation: obj.designation,
             phone: obj.phone,
-            isLogged: true
+            isLogged: true,
+            error: null,
         });
     },
 
@@ -64,6 +72,38 @@ const useUserStore = create((set, get) => ({
             phone: obj.phone ? obj.phone : '',
             isLogged: true,
         })
+    },
+
+    // Forgot password logic - email handling and sending reset password link
+    forgotPassword: async (email) => {
+
+        const { data: userPresentData, error: userPresentError } = await supabase.from('Users').select('*').eq('email', email).single();
+
+        if (userPresentError || !userPresentData) {
+            set({ error: "No account found in our database. Please create your account first." });
+            return;
+        }
+
+        const { resetError } = await supabase.auth.resetPasswordForEmail(email, {
+            redirectTo: 'http://localhost:5173/p/reset-password'
+        });
+
+        if (resetError) {
+            set({ error: resetError.message });
+        }
+    },
+
+    resetPassword: async (newPassword) => {
+        const { error } = await supabase.auth.updateUser({
+            password: newPassword,
+        });
+
+        if (error) {
+            set({ error: error.message });
+            return;
+        }
+
+        set({ isLogged: true });
     },
 
 }));

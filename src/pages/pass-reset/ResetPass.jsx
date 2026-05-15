@@ -23,7 +23,7 @@ const ResetPass = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // resetPassword(passwords.password);
+        resetPassword(passwords.password);
         console.log(passwords)
     }
 
@@ -43,7 +43,7 @@ const ResetPass = () => {
                 <div className="reset-pass-headers">
                     <h1>Clario</h1>
                     <h2>Set a new password.</h2>
-                    <p>Your new password must be different from your previous one.</p>
+                    <p>Your new password must be atleast 6 characters long.</p>
                 </div>
 
                 {/* Form */}
