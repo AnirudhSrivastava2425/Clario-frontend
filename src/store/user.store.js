@@ -65,11 +65,30 @@ const useUserStore = create((set, get) => ({
 
     // Logic for getting user details and setting the details in the store
     getUser: (obj) => {
-        set({
-            name: obj.name,
+
+        const { data: presentUserData, error: presentUserError } = await supabase.from('Users').select('*').eq('email', obj.email).single();
+
+        if (presentUserError || !presentUserData) {
+            set({ error: "An account with this email does not exist. Please create an account." });
+            return;
+        }
+
+        const {data,error} = await supabase.auth.signInWithPassword({
             email: obj.email,
-            designation: obj.designation ? obj.designation : '',
-            phone: obj.phone ? obj.phone : '',
+            password: obj.password,
+        });
+
+        if (error) {
+            set({ error: error.message });
+            return;
+        }
+
+        const {data: userData, error: userError} = await supabase.from('Users').select('*').eq('email', data.user.email).single();
+        set({
+            name: userData.fullname,
+            email: userData.email,
+            designation: userData.designation ? userData.designation : '',
+            phone: userData.phone ? userData.phone : '',
             isLogged: true,
         })
     },
@@ -91,6 +110,9 @@ const useUserStore = create((set, get) => ({
         if (resetError) {
             set({ error: resetError.message });
         }
+        else{
+            set({ error: null });
+        }
     },
 
     resetPassword: async (newPassword) => {
@@ -103,7 +125,7 @@ const useUserStore = create((set, get) => ({
             return;
         }
 
-        set({ isLogged: true });
+        set({ isLogged: true, error:null });
     },
 
 }));

@@ -17,8 +17,8 @@ const ResetEmail = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const result = await forgotPassword(email);
-        console.log(email);
+        forgotPassword(email);
+
     }
 
     useEffect(() => {

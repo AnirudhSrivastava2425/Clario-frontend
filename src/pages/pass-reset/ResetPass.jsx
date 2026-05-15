@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 
 const ResetPass = () => {
 
-    const { resetPassword } = useUserStore();
+    const { resetPassword,error } = useUserStore();
     const [formIncomplete, setFormIncomplete] = useState(true);
     const [passwords, setPasswords] = useState({
         password: "",
@@ -26,6 +26,12 @@ const ResetPass = () => {
         resetPassword(passwords.password);
         console.log(passwords)
     }
+
+    useEffect(() => {
+        if(error){
+            alert(error);
+        }
+    }, [error])
 
     useEffect(() => {
         if (passwords.password === '' || passwords.password.length < 6 || passwords.password !== passwords.repassword) {
