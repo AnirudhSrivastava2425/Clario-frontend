@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Signup.css'
 import Input from '../../components/input/Input'
 import useUserStore from '../../store/user.store'
+import { Link } from 'react-router-dom'
 
 
 const Signup = () => {
@@ -32,7 +33,7 @@ const Signup = () => {
 
     useEffect(()=>{
         
-        if (newUser.fullname === '' || newUser.email === '' || newUser.password === '' || newUser.password !== newUser.repassword) {
+        if (newUser.fullname === '' || newUser.email === '' || newUser.password === '' || newUser.password !== newUser.repassword || newUser.password.length < 6) {
             setFormIncomplete(true);
         }
         else{
@@ -120,11 +121,12 @@ const Signup = () => {
                                 onChange={handleInputChange}
                                 isRequired={true}
                             />
-
                         </div>
+                        <p>NOTE: Your password must be of at least 6 characters. Fields with * are required.</p>
                         <button disabled={formIncomplete}>Sign Up</button>
                         <p className="redirect-text">
-                            Already have an account? <a href="/login">Log In</a>
+                            Already have an account? 
+                            <Link to="/login"> Log In</Link>
                         </p>
                     </form>
                 </div>

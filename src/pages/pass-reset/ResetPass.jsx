@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import './Login.css'
+import './ResetPass.css'
 import Input from '../../components/input/Input'
 import useUserStore from '../../store/user.store'
 import { Link } from 'react-router-dom'
 
 
-const Login = () => {
+const ResetPass = () => {
 
-    const { getUser,testTableFetch } = useUserStore();
+    const { resetPassword } = useUserStore();
     const [formIncomplete, setFormIncomplete] = useState(true);
-    const [credentials, setCredentials] = useState({
-        email: "",
+    const [passwords, setPasswords] = useState({
         password: "",
+        repassword: "",
     })
 
     const handleInputChange = (target, value) => {
-        setCredentials((prev) => ({
+        setPasswords((prev) => ({
             ...prev,
             [target]: value,
         }));
@@ -23,67 +23,66 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        getUser(credentials);
+        // resetPassword(passwords.password);
+        console.log(passwords)
     }
 
     useEffect(() => {
-        if (credentials.email === '' || credentials.password === '') {
+        if (passwords.password === '' || passwords.password.length < 6 || passwords.password !== passwords.repassword) {
             setFormIncomplete(true);
         } else {
             setFormIncomplete(false);
         }
-    }, [credentials.email, credentials.password])
+    }, [passwords.password, passwords.repassword])
 
     return (
         <div className='main-wrapper'>
-            <div className="login-container">
+            <div className="reset-pass-container">
 
-                {/* Headers for login page */}
-                <div className="login-headers">
+                {/* Headers */}
+                <div className="reset-pass-headers">
                     <h1>Clario</h1>
-                    <h2>Welcome back.</h2>
+                    <h2>Set a new password.</h2>
+                    <p>Your new password must be different from your previous one.</p>
                 </div>
 
-                {/* Form for login page */}
+                {/* Form */}
                 <div className="form-holder">
                     <form action="" onSubmit={handleSubmit}>
 
                         <Input
-                            target="email"
-                            label="Email"
-                            type="email"
-                            placeholder="Eg: john.doe@example.com"
-                            value={credentials.email}
+                            target="password"
+                            label="New Password"
+                            type="password"
+                            placeholder="Eg: Ekd79,0ok****"
+                            value={passwords.password}
                             onChange={handleInputChange}
                             isRequired={true}
                         />
 
                         <Input
-                            target="password"
-                            label="Password"
+                            target="repassword"
+                            label="Re-enter New Password"
                             type="password"
                             placeholder="Eg: Ekd79,0ok****"
-                            value={credentials.password}
+                            value={passwords.repassword}
                             onChange={handleInputChange}
                             isRequired={true}
                         />
 
-                        <p>Forgot Password? 
-                            <Link to="/e/reset-password"> Reset your credentials.</Link>
-                        </p>
-
-                        <button disabled={formIncomplete}>Login</button>
+                        <button disabled={formIncomplete}>Update Password</button>
 
                         <p className="redirect-text">
-                            Don't have an account? 
-                            <Link to="/create-account"> Sign Up</Link>
+                            Remembered your password?
+                            <Link to="/login"> Login</Link>
                         </p>
 
                     </form>
                 </div>
+
             </div>
         </div>
     )
 }
 
-export default Login
+export default ResetPass

@@ -3,12 +3,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* height: 100%; */
     gap: 24px;
     padding: 40px 40px;
 }
 
-.login-container {
+.reset-email-container {
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -18,22 +17,29 @@
     gap: 48px;
 }
 
-.login-headers {
+.reset-email-headers {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.login-headers h1 {
+.reset-email-headers h1 {
     font-size: 48px;
     font-weight: 600;
     color: var(--primary-color);
 }
 
-.login-headers h2 {
+.reset-email-headers h2 {
     font-size: 36px;
     font-weight: 500;
     color: var(--header-black);
+}
+
+.reset-email-headers p {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--header-black);
+    opacity: 0.7;
 }
 
 .form-holder form {
@@ -47,9 +53,3 @@
     font-size: 16px;
     color: var(--header-black);
 }
-
-/* .redirect-text a {
-    color: var(--primary-color);
-    text-decoration: underline;
-    cursor: pointer;
-} */
