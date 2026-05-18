@@ -24,7 +24,6 @@ const ResetPass = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         resetPassword(passwords.password);
-        console.log(passwords)
     }
 
     useEffect(() => {
